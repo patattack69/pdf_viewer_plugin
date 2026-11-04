@@ -8,12 +8,17 @@ export 'package:pdf_viewer_plugin/src/android_viewers/surface_android_pdf_viewer
 
 typedef void PdfViewerCreatedCallback();
 
+/// TEMPORARY: receives the full list of native load diagnostics every time it changes. iOS only.
+typedef PdfViewDiagnosticsCallback = void Function(List<String> diagnostics);
+
 class CreationParams {
   CreationParams({
     this.path,
+    this.onDiagnostics,
   });
 
   final String? path;
+  final PdfViewDiagnosticsCallback? onDiagnostics;
 
   @override
   String toString() {
@@ -36,6 +41,7 @@ class PdfView extends StatefulWidget {
     required this.path,
     this.gestureRecognizers,
     this.gestureNavigationEnabled = false,
+    this.onDiagnostics,
   }) : super(key: key);
 
   static PdfViewerPlatform? _platform;
@@ -92,6 +98,9 @@ class PdfView extends StatefulWidget {
   /// By default `gestureNavigationEnabled` is false.
   final bool gestureNavigationEnabled;
 
+  /// TEMPORARY: native load diagnostics (file, PDFKit, WKWebView navigation events). iOS only.
+  final PdfViewDiagnosticsCallback? onDiagnostics;
+
   @override
   State<StatefulWidget> createState() => _PdfViewState();
 }
@@ -110,5 +119,6 @@ class _PdfViewState extends State<PdfView> {
 CreationParams _creationParamsFromWidget(PdfView widget) {
   return CreationParams(
     path: widget.path,
+    onDiagnostics: widget.onDiagnostics,
   );
 }

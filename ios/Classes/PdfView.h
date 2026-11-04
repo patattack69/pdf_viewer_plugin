@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PdfViewController : NSObject <FlutterPlatformView>
+@interface PdfViewController : NSObject <FlutterPlatformView, WKNavigationDelegate>
 
 - (instancetype)initWithFrame:(CGRect)frame
                viewIdentifier:(int64_t)viewId
