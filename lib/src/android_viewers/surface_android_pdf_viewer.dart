@@ -38,6 +38,9 @@ class SurfaceAndroidPdfViewer extends AndroidPdfViewer {
           creationParamsCodec: const StandardMessageCodec(),
         )
           ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+          ..addOnPlatformViewCreatedListener((id) =>
+              MethodChannelPdfViewerPlatform.listenDiagnostics(
+                  id, creationParams.onDiagnostics))
           ..create();
       },
     );

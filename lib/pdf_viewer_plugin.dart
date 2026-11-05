@@ -8,7 +8,7 @@ export 'package:pdf_viewer_plugin/src/android_viewers/surface_android_pdf_viewer
 
 typedef void PdfViewerCreatedCallback();
 
-/// TEMPORARY: receives the full list of native load diagnostics every time it changes. iOS only.
+/// TEMPORARY: receives the full list of native load diagnostics every time it changes.
 typedef PdfViewDiagnosticsCallback = void Function(List<String> diagnostics);
 
 class CreationParams {
@@ -98,7 +98,8 @@ class PdfView extends StatefulWidget {
   /// By default `gestureNavigationEnabled` is false.
   final bool gestureNavigationEnabled;
 
-  /// TEMPORARY: native load diagnostics (file, PDFKit, WKWebView navigation events). iOS only.
+  /// TEMPORARY: native load diagnostics. iOS: file, PDFKit, WKWebView navigation events.
+  /// Android: file, Pdfium libraries, viewer load/render events, off-screen Pdfium and PdfRenderer checks.
   final PdfViewDiagnosticsCallback? onDiagnostics;
 
   @override

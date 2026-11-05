@@ -26,7 +26,9 @@ class AndroidPdfViewer implements PdfViewerPlatform {
       excludeFromSemantics: true,
       child: AndroidView(
         viewType: 'pdf_viewer_plugin',
-        onPlatformViewCreated: (int id) {},
+        onPlatformViewCreated: (int id) =>
+            MethodChannelPdfViewerPlatform.listenDiagnostics(
+                id, creationParams?.onDiagnostics),
         gestureRecognizers: gestureRecognizers,
         layoutDirection: TextDirection.rtl,
         creationParams:
